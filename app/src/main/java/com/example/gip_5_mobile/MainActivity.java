@@ -70,17 +70,15 @@ public class MainActivity extends AppCompatActivity {
                     public Map<String, String> getHeaders() throws AuthFailureError{
                         Map<String, String> headers = new HashMap<>();
 
-                        headers.put("Content-Type", "application/json;charset=UTF-8");
-
                         //autherization
                         String auth = getEditText1() + ":" + getEditText2();
                         byte [] bytes = auth.getBytes(StandardCharsets.UTF_8);
                         String base = Base64.getEncoder().encodeToString(bytes);
                         System.out.println(base);
 
-
-
-                        headers.put("Authorization", "Basic " + auth);
+                        headers.put("Content-Type", "application/json;charset=UTF-8");
+                        headers.put("Authorization", "Basic " + base);
+                        System.out.println("Basic " + auth);
                         //headers.put("Content-Length", "<calculated when request is sent>");
                         //headers.put("Host", "<calculated when request is sent>");
                         //headers.put("Accept-Encoding", "gzip, deflate,br");
