@@ -77,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
                                 if (!response.toString().isEmpty()){
                                     Intent intent = new Intent(getApplicationContext(),
                                             MainActivity2.class);
+
+                                    String auth = getEditText1() + ":" + getEditText2();
+                                    byte [] bytes = auth.getBytes(StandardCharsets.UTF_8);
+                                    String base = Base64.getEncoder().encodeToString(bytes);
+
+                                    intent.putExtra("base", base);
                                     startActivity(intent);
                                 }
                             }
@@ -99,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                         String auth = getEditText1() + ":" + getEditText2();
                         byte [] bytes = auth.getBytes(StandardCharsets.UTF_8);
                         String base = Base64.getEncoder().encodeToString(bytes);
-                        System.out.println(base);
 
                         headers.put("Content-Type", "application/json;charset=UTF-8");
                         headers.put("Authorization", "Basic " + base);
@@ -203,6 +208,13 @@ public class MainActivity extends AppCompatActivity {
                                         if (!response.toString().isEmpty()){
                                             Intent intent = new Intent(getApplicationContext(),
                                                     MainActivity2.class);
+
+                                            String auth =
+                                                    dialog_editText4.getText().toString() + ":" + dialog_editText5.getText().toString();
+                                            byte [] bytes = auth.getBytes(StandardCharsets.UTF_8);
+                                            String base = Base64.getEncoder().encodeToString(bytes);
+
+                                            intent.putExtra("base" , base);
                                             startActivity(intent);
                                         }
                                     }
