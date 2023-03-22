@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                     String base = Base64.getEncoder().encodeToString(bytes);
 
                                     intent.putExtra("base", base);
+                                    //System.out.println(base);
                                     startActivity(intent);
                                 }
                             }
@@ -118,9 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 };
 
                 requestQueue.add(jsonObjectRequest);
-
-                //Intent intent = new Intent(getApplicationContext(),MainActivity2.class);
-                //startActivity(intent);
             }
         });
     }
