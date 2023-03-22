@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/fout"
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="5dp"
+
+        android:text="fout"
+        android:textColor="@color/white"
+
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/email"
+
+        android:background="@color/red"
+
+        android:visibility="invisible"
+        />
+
     <EditText
         android:id="@+id/email"
 
