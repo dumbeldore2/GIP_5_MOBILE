@@ -8,9 +8,12 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -28,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,11 +42,20 @@ public class MainActivity2 extends AppCompatActivity {
     Button button;
     TextView textView1;
     ImageView imageview1;
+    ListView listView;
+    MainActivity2_adapter mainActivity2_adapter;
 
     //basic auth string
     Intent intent;
     String base;
     String email;
+    String id1 [] = new String[]{"eloo"};
+    String name1 [] = new String[]{"eloo"};
+    String type1 [] = new String[]{"eloo"};
+    String extraInfo1 [] = new String[]{"eloo"};
+    String price1 [] = new String[]{"eloo"};
+    String amount1 [] = new String[]{"eloo"};
+    String modelnr1 [] = new String[]{"eloo"};
 
     // url string
     String url = "http://192.168.1.103:8080/api/v1/";
@@ -60,24 +73,66 @@ public class MainActivity2 extends AppCompatActivity {
         button = findViewById(R.id.button);
         textView1 = findViewById(R.id.text_1);
         imageview1 = findViewById(R.id.image_1);
+        listView =  findViewById(R.id.list);
 
         //functies
         //vragen achter inventory
-        fun_api();
         fun_add_item();
         fun_account();
 
-    }
-
-    public void fun_api(){
-
         //api request
-        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity2.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET,
                 url + "item/getall", null,
                 new Response.Listener<JSONArray>() {
                     @Override public void onResponse(JSONArray response) {
-                        System.out.println(response.toString());
+                        //String [][] array = new String[response.length()][];
+                        try {
+                            System.out.println(response.length());
+                            String id [] = new String[response.length()];
+                            String name [] = new String[response.length()];
+                            String type [] = new String[response.length()];
+                            String extraInfo [] = new String[response.length()];
+                            String price [] = new String[response.length()];
+                            String amount [] = new String[response.length()];
+                            String modelnr [] = new String[response.length()];
+
+                            for (int i = 0; i < response.length(); i++){
+                                //System.out.println(i);
+                                id[i] = (String) response.getJSONObject(i).get("id").toString();
+                                name[i] = (String) response.getJSONObject(i).get("name").toString();
+                                type[i] = (String) response.getJSONObject(i).get("type").toString();
+                                extraInfo[i] = (String) response.getJSONObject(i).get("extraInfo").toString();
+                                price[i] = (String) response.getJSONObject(i).get("price").toString();
+                                amount[i] = (String) response.getJSONObject(i).get("amount").toString();
+                                modelnr[i] = (String) response.getJSONObject(i).get("modelNr").toString();
+
+                            }
+                            id1 = id;
+                            name1 = name;
+                            type1 = type;
+                            extraInfo1 = extraInfo;
+                            price1 = price;
+                            amount1 = amount;
+                            modelnr1 = modelnr;
+
+
+                            System.out.println(id[15]);
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        System.out.println("ello");
+
+                        mainActivity2_adapter = new MainActivity2_adapter(MainActivity2.this
+                                ,id1, name1,type1,price1);
+                        listView.setAdapter(mainActivity2_adapter);
+                        //System.out.println(array[0][5]);
+                        //System.out.println(array[1][2]);
+                        //System.out.println(array[2][3]);
                     }
                 }, new Response.ErrorListener() {
             @Override public void onErrorResponse(VolleyError error) {
