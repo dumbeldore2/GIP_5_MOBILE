@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         "/yago.engels@gmail.com", null,
                         new Response.Listener<JSONObject>() {
                             @Override public void onResponse(JSONObject response) {
-                                //System.out.println(response.toString());
+                                System.out.println(response.toString());
                                 //als er data word teruggegeven zal er worden door gegaan naar de
                                 // volgende activity
                                 if (!response.toString().isEmpty()){
