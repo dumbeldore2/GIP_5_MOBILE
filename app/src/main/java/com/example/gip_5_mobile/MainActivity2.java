@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -33,10 +35,13 @@ public class MainActivity2 extends AppCompatActivity {
     //initen van views
     Button button;
     TextView textView1;
+    ImageView imageview1;
 
     //basic auth string
     Intent intent;
     String base;
+    String email;
+
     // url string
     String url = "http://192.168.1.103:8080/api/v1/";
 
@@ -47,15 +52,18 @@ public class MainActivity2 extends AppCompatActivity {
         //base string maken
         intent = getIntent();
         base = intent.getStringExtra("base");
+        email = intent.getStringExtra("email");
 
         //conecten van views
         button = findViewById(R.id.button);
         textView1 = findViewById(R.id.text_1);
+        imageview1 = findViewById(R.id.image_1);
 
         //functies
         //vragen achter inventory
         //fun_api();
         fun_add_item();
+        fun_account();
 
     }
 
@@ -205,6 +213,19 @@ public class MainActivity2 extends AppCompatActivity {
                     }
                 });
                 dialog.show();
+            }
+        });
+    }
+
+    public void fun_account(){
+        imageview1.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity4.class);
+
+                intent.putExtra("base",base);
+                intent.putExtra("email",email);
+
+                startActivity(intent);
             }
         });
     }

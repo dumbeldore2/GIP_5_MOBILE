@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                     String base = Base64.getEncoder().encodeToString(bytes);
 
                                     intent.putExtra("base", base);
+                                    intent.putExtra("email", getEditText1());
                                     //System.out.println(base);
                                     startActivity(intent);
                                 }
@@ -212,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                                             String base = Base64.getEncoder().encodeToString(bytes);
 
                                             intent.putExtra("base" , base);
+                                            intent.putExtra("email" , dialog_editText4.getText());
                                             startActivity(intent);
                                         }
                                     }
