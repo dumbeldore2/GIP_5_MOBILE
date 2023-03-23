@@ -64,32 +64,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:id="@+id/image_2"
-
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_2"
+        <Button
+            android:id="@+id/button"
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            app:layout_constraintTop_toTopOf="@id/image_2"
-            app:layout_constraintBottom_toBottomOf="@id/image_2"
-            app:layout_constraintStart_toStartOf="@id/image_2"
-            app:layout_constraintEnd_toEndOf="@id/image_2"
-
-            android:text="add"
-            android:textSize="42dp"
-
-            android:gravity="center"/>
+            android:text="add item"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -135,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
         textView2.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
 
-                System.out.println("llo");
                 final Dialog dialog = new Dialog(MainActivity.this);
                 //title ios meegegeven dus niet nodig
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
