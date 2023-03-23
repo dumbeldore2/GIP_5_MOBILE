@@ -40,8 +40,6 @@ public class MainActivity2_adapter extends ArrayAdapter<String> {
                 (LayoutInflater) getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View row = layoutInflater.inflate(R.layout.activity_main2_list,parent,false);
 
-        System.out.println("loooa");
-
         TextView textView1 = row.findViewById(R.id.text_1);
         TextView textView2 = row.findViewById(R.id.text_2);
         TextView textView3 = row.findViewById(R.id.text_3);
