@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                                 // volgende activity
                                 if (!response.toString().isEmpty()){
                                     Intent intent = new Intent(getApplicationContext(),
-                                            MainActivity2.class);
+                                            MainActivity3.class);
 
                                     String auth = getEditText1() + ":" + getEditText2();
                                     byte [] bytes = auth.getBytes(StandardCharsets.UTF_8);
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                                         // naar de volgende mainacitivty
                                         if (!response.toString().isEmpty()){
                                             Intent intent = new Intent(getApplicationContext(),
-                                                    MainActivity2.class);
+                                                    MainActivity3.class);
 
                                             String auth =
                                                     dialog_editText4.getText().toString() + ":" + dialog_editText5.getText().toString();

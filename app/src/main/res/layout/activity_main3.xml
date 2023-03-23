@@ -5,5 +5,130 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity3">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_1"
 
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_1"
+
+            android:text="Welkom"
+            android:textColor="@color/black"
+            android:textSize="42dp"
+
+            android:gravity="center"
+
+            android:layout_marginRight="100dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/image_1"
+
+            android:src="@drawable/account"
+
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            app:layout_constraintStart_toEndOf="@id/text_1"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraint_1"
+
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_2"
+
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+
+            android:background="@drawable/background_card">
+
+            <TextView
+                android:id="@+id/text_2"
+
+                android:textSize="32dp"
+                android:textColor="@color/black"
+                android:text="IVENTORY"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginLeft="15dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_3"
+
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+
+            android:background="@drawable/background_card">
+
+            <TextView
+                android:id="@+id/text_3"
+
+                android:textSize="32dp"
+                android:textColor="@color/black"
+                android:text="STATS"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginLeft="15dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_4"
+
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+
+            android:background="@drawable/background_card">
+
+            <TextView
+                android:id="@+id/text_4"
+
+                android:textSize="32dp"
+                android:textColor="@color/black"
+                android:text="USERS"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginLeft="15dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

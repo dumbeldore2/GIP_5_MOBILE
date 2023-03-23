@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -43,23 +44,26 @@ public class MainActivity2 extends AppCompatActivity {
         //conecten van views
         //functies
         //vragen achter inventory
-        fun_get_all_items();
+        //fun_api();
     }
 
-    public void fun_get_all_items(){
+    public void fun_api(){
+
         //api request
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity2.this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 url + "item/getall", null,
                 new Response.Listener<JSONObject>() {
                     @Override public void onResponse(JSONObject response) {
-                        System.out.println(response.toString());
+                        //System.out.println(response.toString());
+                        if (!response.toString().isEmpty()){
+                            System.out.println(response.toString());
+
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override public void onErrorResponse(VolleyError error) {
-                System.out.println(error.networkResponse.statusCode);
-                if (error.networkResponse.statusCode == 401){
-                }
+                System.out.println("error");
             }
 
         }){
@@ -67,9 +71,9 @@ public class MainActivity2 extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
 
-                //autherization
                 headers.put("Content-Type", "application/json;charset=UTF-8");
                 headers.put("Authorization", "Basic " + base);
+
                 //headers.put("Content-Length", "<calculated when request is sent>");
                 //headers.put("Host", "<calculated when request is sent>");
                 //headers.put("Accept-Encoding", "gzip, deflate,br");
@@ -77,8 +81,6 @@ public class MainActivity2 extends AppCompatActivity {
                 return headers;
             }
         };
-
         requestQueue.add(jsonObjectRequest);
-
     }
 }
