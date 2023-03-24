@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,11 +45,14 @@ public class MainActivity2 extends AppCompatActivity {
     ImageView imageview1;
     ListView listView;
     MainActivity2_adapter mainActivity2_adapter;
+    String s1,s2,s3,s4,s5,s6;
 
     //basic auth string
     Intent intent;
     String base;
     String email;
+
+    //listview
     String id1 [] = new String[]{"eloo"};
     String name1 [] = new String[]{"eloo"};
     String type1 [] = new String[]{"eloo"};
@@ -79,6 +83,7 @@ public class MainActivity2 extends AppCompatActivity {
         //vragen achter inventory
         fun_add_item();
         fun_account();
+        fun_click_item();
 
         //api request
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -117,15 +122,10 @@ public class MainActivity2 extends AppCompatActivity {
                             modelnr1 = modelnr;
 
 
-                            System.out.println(id[15]);
-
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        System.out.println("ello");
 
                         mainActivity2_adapter = new MainActivity2_adapter(MainActivity2.this
                                 ,id1, name1,type1,price1);
@@ -282,5 +282,215 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void fun_click_item(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //api request
+                RequestQueue requestQueue = Volley.newRequestQueue(MainActivity2.this);
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                        url + "item/get/" + Integer.parseInt(id1[position]), null,
+                        new Response.Listener<JSONObject>() {
+                            @Override public void onResponse(JSONObject response) {
+                                final Dialog dialog = new Dialog(MainActivity2.this);
+                                //title ios meegegeven dus niet nodig
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                //buiten het view klikken beindig de dialog
+                                dialog.setCancelable(true);
+                                //dialog linken
+                                dialog.setContentView(R.layout.activity_main2_dialog2);
+
+                                //init de views van het dialoog
+                                final EditText dialog2_editText = dialog.findViewById(R.id.edit_text_1);
+                                final EditText dialog2_editText2 = dialog.findViewById(R.id.edit_text_2);
+                                final EditText dialog2_editText3 = dialog.findViewById(R.id.edit_text_3);
+                                final EditText dialog2_editText4 = dialog.findViewById(R.id.edit_text_4);
+                                final EditText dialog2_editText5 = dialog.findViewById(R.id.edit_text_5);
+                                final EditText dialog2_editText6 = dialog.findViewById(R.id.edit_text_6);
+
+                                Button button = dialog.findViewById(R.id.button);
+                                Button button2 = dialog.findViewById(R.id.button2);
+
+                                try {
+                                    s1 = response.get("name").toString();
+                                    s2 = response.get("type").toString();
+                                    s3 = response.get("modelNr").toString();
+                                    s4 = response.get("amount").toString();
+                                    s5 = response.get("extraInfo").toString();
+                                    s6 = response.get("price").toString();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                if (!s1.isEmpty()){
+                                    dialog2_editText.setHint("name =" + s1);
+                                    dialog2_editText2.setHint("type =" + s2);
+                                    dialog2_editText3.setHint("modelnr =" + s3);
+                                    dialog2_editText4.setHint("amount =" + s4);
+                                    dialog2_editText5.setHint("extra info =" + s5);
+                                    dialog2_editText6.setHint("price = €" + s6);
+                                }
+
+                                button.setOnClickListener(v1->{
+                                    JSONObject jsonParams = new JSONObject();
+                                    try {
+                                        if (dialog2_editText.getText().length() != 0){
+                                            jsonParams.put("name", dialog2_editText.getText().toString());
+                                            System.out.println(dialog2_editText.getText().toString());
+                                        } else {
+                                            jsonParams.put("name", s1);
+                                        }
+                                        if (dialog2_editText2.getText().length() != 0){
+                                            jsonParams.put("type",
+                                                    dialog2_editText2.getText().toString());
+                                            System.out.println(dialog2_editText2.getText().toString());
+                                        } else {
+                                            jsonParams.put("type", s2);
+                                        }
+                                        if (dialog2_editText3.getText().length() != 0){
+                                            jsonParams.put("modelNr",
+                                                    dialog2_editText3.getText().toString());
+                                            System.out.println(dialog2_editText3.getText().toString());
+                                        } else {
+                                            jsonParams.put("modelNr", s3);
+                                        }
+                                        if (dialog2_editText4.getText().length() != 0){
+                                            jsonParams.put("amount",
+                                                    Integer.parseInt(dialog2_editText4.getText().toString()));
+                                            System.out.println(dialog2_editText4.getText().toString());
+                                        } else {
+                                            jsonParams.put("amount", Integer.parseInt(s4));
+                                        }
+                                        if (dialog2_editText5.getText().length() != 0){
+                                            jsonParams.put("extraInfo",
+                                                    dialog2_editText5.getText().toString());
+                                        } else {
+                                            jsonParams.put("extraInfo", s5);
+                                        }
+                                        if (dialog2_editText6.getText().length() != 0){
+                                            jsonParams.put("modelNr",
+                                                    dialog2_editText6.getText().toString());
+                                        } else {
+                                            jsonParams.put("modelNr", s6);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    fun_api_update(jsonParams,position);
+                                    dialog.dismiss();
+                                });
+
+                                button2.setOnClickListener(v1->{
+                                    fun_delete(position);
+                                    dialog.dismiss();
+                                });
+
+                                dialog.show();
+
+                            }
+
+                        }, new Response.ErrorListener() {
+                    @Override public void onErrorResponse(VolleyError error) {
+                        //System.out.println("error");
+                        System.out.println(error);
+                    }
+
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<>();
+
+                        headers.put("Content-Type", "application/json;charset=UTF-8");
+                        headers.put("Authorization", "Basic " + base);
+
+                        //headers.put("Content-Length", "<calculated when request is sent>");
+                        //headers.put("Host", "<calculated when request is sent>");
+                        //headers.put("Accept-Encoding", "gzip, deflate,br");
+                        //headers.put("Connection", "keep-alive");
+                        return headers;
+                    }
+                };
+                requestQueue.add(jsonObjectRequest);
+            }
+        });
+    }
+
+    public void fun_api_update(JSONObject jsonObject, int i){
+        //api request
+        RequestQueue requestQueue =
+                Volley.newRequestQueue(MainActivity2.this);
+        JsonObjectRequest jsonObjectRequest =
+                new JsonObjectRequest(Request.Method.PUT,
+                        url + "item/update/" + Integer.parseInt(id1[i]),
+                        jsonObject,
+                        new Response.Listener<JSONObject>() {
+                            @Override public void onResponse(JSONObject response) {
+                                //System.out.println(response.toString());
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+
+                    }
+
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError{
+                        Map<String, String> headers = new HashMap<>();
+
+                        //autherization
+                        headers.put("Content-Type", "application/json;charset=UTF-8");
+                        headers.put("Authorization", "Basic " + base);
+                        //headers.put("Content-Length", "<calculated when request is sent>");
+                        //headers.put("Host", "<calculated when request is sent>");
+                        //headers.put("Accept-Encoding", "gzip, deflate,br");
+                        //headers.put("Connection", "keep-alive");
+                        return headers;
+                    }
+                };
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void fun_delete(int i){
+        //api request
+        RequestQueue requestQueue =
+                Volley.newRequestQueue(MainActivity2.this);
+        JsonObjectRequest jsonObjectRequest =
+                new JsonObjectRequest(Request.Method.DELETE,
+                        url + "item/delete/" + Integer.parseInt(id1[i]),
+                        null,
+                        new Response.Listener<JSONObject>() {
+                            @Override public void onResponse(JSONObject response) {
+                                //System.out.println(response.toString());
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+
+                    }
+
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError{
+                        Map<String, String> headers = new HashMap<>();
+
+                        //autherization
+                        headers.put("Content-Type", "application/json;charset=UTF-8");
+                        headers.put("Authorization", "Basic " + base);
+                        //headers.put("Content-Length", "<calculated when request is sent>");
+                        //headers.put("Host", "<calculated when request is sent>");
+                        //headers.put("Accept-Encoding", "gzip, deflate,br");
+                        //headers.put("Connection", "keep-alive");
+                        return headers;
+                    }
+                };
+
+        requestQueue.add(jsonObjectRequest);
     }
 }
