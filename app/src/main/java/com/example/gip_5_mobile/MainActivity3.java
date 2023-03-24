@@ -51,13 +51,11 @@ public class MainActivity3 extends AppCompatActivity {
         // views connecten
         constraintLayout1 = findViewById(R.id.constraint_2);
         constraintLayout2 = findViewById(R.id.constraint_3);
-        constraintLayout3 = findViewById(R.id.constraint_4);
         imageview1 = findViewById(R.id.image_1);
 
         //functies
         fun_click_1();
-        //fun_click_2();
-        //fun_click_3();
+        fun_click_2();
         fun_account();
     }
 
@@ -73,21 +71,10 @@ public class MainActivity3 extends AppCompatActivity {
         });
     }
     public void fun_click_2(){
-        constraintLayout1.setOnClickListener(new View.OnClickListener() {
+        constraintLayout2.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),
-                        MainActivity2.class);
-                intent.putExtra("base", base);
-                intent.putExtra("email", email);
-                startActivity(intent);
-            }
-        });
-    }
-    public void fun_click_3(){
-        constraintLayout1.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),
-                        MainActivity2.class);
+                        MainActivity5.class);
                 intent.putExtra("base", base);
                 intent.putExtra("email", email);
                 startActivity(intent);

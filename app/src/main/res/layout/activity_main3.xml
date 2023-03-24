@@ -95,33 +95,7 @@
 
                 android:textSize="32dp"
                 android:textColor="@color/black"
-                android:text="STATS"
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_marginLeft="15dp"/>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_4"
-
-            android:layout_width="match_parent"
-            android:layout_height="175dp"
-
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-
-            android:background="@drawable/background_card">
-
-            <TextView
-                android:id="@+id/text_4"
-
-                android:textSize="32dp"
-                android:textColor="@color/black"
-                android:text="USERS"
+                android:text="users"
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
